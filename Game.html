@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forza Browser Edition</title>
+    <link rel="stylesheet" href="game.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900&display=swap" rel="stylesheet">
+    <!-- Three.js (3D Engine) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+    <!-- UI Overlay -->
+    <div class="ui-layer">
+        
+        <!-- Score / Skill Chain -->
+        <div class="score-container">
+            <div class="skill-text" id="skill-action">DRIFTING</div>
+            <div class="skill-score" id="score">0</div>
+        </div>
+
+        <!-- Speedometer -->
+        <div class="speedometer-container">
+            <div class="speed-circle">
+                <div class="speed-text"><span id="speed">0</span> <span class="unit">MPH</span></div>
+                <div class="gear-text" id="gear">1</div>
+                <div class="rpm-bar-bg">
+                    <div class="rpm-bar" id="rpm"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Hint -->
+        <div class="controls-hint">
+            ARROWS to Steer • UP to Accelerate
+        </div>
+
+        <!-- Game Over Screen -->
+        <div class="game-over" id="game-over">
+            <h1>CRASHED</h1>
+            <p>Refresh to restart</p>
+        </div>
+    </div>
+
+    <!-- 3D Canvas Container -->
+    <div id="game-container"></div>
+
+    <script src="game.js"></script>
+</body>
+</html>
