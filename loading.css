@@ -1,0 +1,105 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling */
+    font-family: 'Roboto', sans-serif;
+    background-color: #111;
+}
+
+/* Background Image */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Use your local image 'background.png' here. 
+       Fallback to a web URL if local is missing. */
+    background-image: url('background.png'), url('https://images.wallpapersden.com/image/download/forza-horizon-4-acura-nsx_a2lrbWyUmZqaraWkpJRmbmdlrWZlbWU.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+/* Bottom Black Bar */
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh; /* Takes up bottom 15% of screen */
+    background-color: #000;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #FFF;
+}
+
+/* Text: OPTIMIZING... */
+.loading-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-style: italic; /* Slight tilt like the screenshot */
+}
+
+/* The white line container */
+.progress-line-container {
+    width: 350px; /* Width of the underline */
+    height: 2px;
+    background-color: #333; /* Dark gray background for line */
+    position: relative;
+    margin-bottom: 5px;
+}
+
+/* The actual white filling line */
+.progress-line {
+    width: 0%; /* Starts at 0 */
+    height: 100%;
+    background-color: #FFF;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: width 0.1s linear;
+}
+
+/* Percentage Text */
+.percentage-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-style: italic;
+    color: #FFF;
+}
+
+/* Spinner Location */
+.spinner-container {
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+}
+
+/* Spinner Animation */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #FFF; /* The visible spinning part */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    .progress-line-container { width: 80%; }
+    .loading-text { font-size: 0.9rem; }
+    .spinner { width: 30px; height: 30px; border-width: 3px; }
+}
