@@ -17,7 +17,7 @@ html, body {
     height: 100%;
     /* Use your local image 'background.png' here. 
        Fallback to a web URL if local is missing. */
-    background-image: url('background.png'), url('https://images.wallpapersden.com/image/download/forza-horizon-4-acura-nsx_a2lrbWyUmZqaraWkpJRmbmdlrWZlbWU.jpg');
+    background-image: url('background.png'), url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-bg-3.png');
     background-size: cover;
     background-position: center;
     z-index: 0;
