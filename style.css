@@ -1,0 +1,174 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #000;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.background {
+    position: fixed;
+    inset: 0;
+    background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-bg-1-min.png);
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px) brightness(0.4);
+    z-index: -1;
+}
+
+.container {
+    width: 95%;
+    margin: auto;
+    padding-top: 40px;
+}
+
+/* Navigation */
+
+.container--navigation {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.item--link {
+    position: relative;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.item--link.active,
+.item--link:hover {
+    opacity: 1;
+}
+
+.item--notification {
+    position: absolute;
+    top: -10px;
+    right: -12px;
+    background: #f90;
+    color: #000;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+/* Top cards */
+
+.container--top-menu,
+.container--bottom-menu {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0;
+}
+
+.container--card-spot {
+    flex: 1;
+    padding: 10px;
+}
+
+.container--card {
+    background: rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 12px;
+    backdrop-filter: blur(6px);
+    overflow: hidden;
+    position: relative;
+}
+
+.container--card.border {
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+.item--card-image {
+    background-size: cover;
+    background-position: center;
+    height: 120px;
+    border-radius: 10px;
+}
+
+.med-height {
+    height: 90px !important;
+}
+
+.colorize {
+    filter: hue-rotate(40deg) brightness(1.2);
+}
+
+/* Card text */
+
+.container--card--text {
+    padding: 10px 5px;
+}
+
+.item--card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 6px;
+}
+
+.item--card-sub {
+    font-size: 14px;
+    opacity: 0.75;
+}
+
+.dark {
+    color: #000 !important;
+}
+
+/* Mini cards */
+
+.container--card-mini {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 12px;
+    backdrop-filter: blur(5px);
+}
+
+.container--card-mini--content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.item--card-icon {
+    background-size: cover;
+    background-position: center;
+    width: 38px;
+    height: 38px;
+}
+
+/* Sizes */
+
+.size-1 {
+    flex: 1;
+}
+
+.size-2 {
+    flex: 2;
+}
+
+/* Logo */
+
+.container--logo img {
+    width: 180px;
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+/* Hints */
+
+.hint {
+    opacity: 0.4;
+    font-size: 16px;
+}
