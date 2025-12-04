@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: #111;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Tries to load local background.png, falls back to online image */
+            background-image: url('background.png'), url('https://wallpapercave.com/wp/wp3703614.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15vh;
+            background-color: #000;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #FFF;
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .progress-line-container {
+            width: 350px;
+            height: 2px;
+            background-color: #333;
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .progress-line {
+            width: 0%;
+            height: 100%;
+            background-color: #FFF;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: width 0.1s linear;
+        }
+
+        .percentage-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #FFF;
+        }
+
+        .spinner-container {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #FFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-container"></div>
+
+    <div class="bottom-bar">
+        <div class="loading-content">
+            <div class="loading-text">Going into cars... PLEASE WAIT (takes upto 10 sec)</div>
+            <div class="progress-line-container">
+                <div class="progress-line"></div>
+            </div>
+            <div class="percentage-text" id="percentage">0%</div>
+        </div>
+        
+        <div class="spinner-container">
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- FIXED SCRIPT ---
+        
+        // Make sure this matches the name of your game file!
+        const redirectUrl = "https://www.3dtuning.com/en-US/tuning/nissan/z/2.door.fastback.coupe-rz34.2022"; 
+        const totalTime = 10000; // 10 seconds
+
+        const percentageText = document.getElementById('percentage');
+        const progressLine = document.querySelector('.progress-line');
+
+        let startTime = null;
+
+        function animateLoading(timestamp) {
+            if (!startTime) startTime = timestamp;
+            
+            const elapsed = timestamp - startTime;
+            let progress = Math.min((elapsed / totalTime) * 100, 100);
+            
+            percentageText.innerText = Math.floor(progress) + "%";
+            progressLine.style.width = progress + "%";
+            
+            if (elapsed < totalTime) {
+                requestAnimationFrame(animateLoading);
+            } else {
+                // Redirect happens here
+                console.log("Redirecting to " + redirectUrl);
+                window.location.href = redirectUrl;
+            }
+        }
+
+        requestAnimationFrame(animateLoading);
+    </script>
+</body>
+</html>
