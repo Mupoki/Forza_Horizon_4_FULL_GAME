@@ -11,26 +11,22 @@
             padding: 0;
             width: 100%;
             height: 100%;
+            background-color: black;
             overflow: hidden;
-            background-color: #000;
-            color: white;
-            font-family: sans-serif;
         }
 
-        #video-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        #video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
             z-index: -1;
-        }
-
-        video {
-            min-width: 100%; 
-            min-height: 100%; 
-            width: auto; 
-            height: auto; 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
+            /* Center the video */
+            top: 50%;
+            left: 50%;
             transform: translate(-50%, -50%);
         }
 
@@ -39,24 +35,13 @@
             bottom: 50px;
             width: 100%;
             text-align: center;
-            font-size: 24px;
+            color: white;
+            font-family: sans-serif;
+            font-size: 30px;
             font-weight: bold;
-            text-transform: uppercase;
+            text-shadow: 2px 2px 4px #000;
             animation: pulse 2s infinite;
-            display: none; /* Hidden until video loads */
-        }
-
-        /* Error Message Styling */
-        #debug-console {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 0, 0, 0.8);
-            padding: 20px;
-            border: 2px solid white;
-            display: none; /* Hidden unless error occurs */
-            z-index: 100;
-            max-width: 80%;
+            z-index: 10;
         }
 
         @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
@@ -64,66 +49,36 @@
 </head>
 <body>
 
-    <div id="debug-console"></div>
+    <!-- 
+       IMPORTANT: 
+       1. Rename your file to 'video.mp4' 
+       2. Make sure it is in the EXACT same folder/repository as index.html
+    -->
+    <video autoplay muted loop playsinline id="video-bg">
+        <source src="video.mp4" type="video/mp4">
+    </video>
 
-    <div id="video-container">
-        <!-- 'playsinline' is crucial for some browsers -->
-        <video id="myVideo" autoplay muted loop playsinline>
-            <source src="FH4 (1).mp4" type="video/mp4">
-        </video>
-    </div>
-
-    <div id="prompt">PRESS ENTER TO START</div>
+    <div id="prompt"></div>
 
     <script>
-        const video = document.getElementById('myVideo');
-        const debug = document.getElementById('debug-console');
-        const prompt = document.getElementById('prompt');
+        // Force play just in case browser suspended it
+        const vid = document.getElementById('video-bg');
+        
+        // Sometimes browsers need a little nudge
+        window.onload = function() {
+            vid.play().catch(error => {
+                console.log("Autoplay was prevented. User interaction required.");
+            });
+        };
 
-        // 1. Check if video loads successfully
-        video.addEventListener('canplay', () => {
-            prompt.style.display = 'block'; // Show prompt only if video works
-            video.play();
-        });
-
-        // 2. CATCH ERRORS
-        video.addEventListener('error', function(e) {
-            showError("VIDEO ERROR: The browser cannot play this file.");
-            
-            // detailed check
-            const err = video.error;
-            let msg = "";
-            if (err.code === 4) {
-                msg = "CODE 4: File Not Found or Not Supported.<br><br>" + 
-                      "1. Check if file is named exactly <b>forza_intro.mp4</b><br>" +
-                      "2. Is it in the same folder as index.html?<br>" + 
-                      "3. Windows might be hiding the real extension (e.g. forza_intro.mp4.mp4)";
-            } else {
-                msg = "Error Code: " + err.code;
-            }
-            showError(msg);
-        }, true);
-
-        // 3. Catch Source Errors (specifically 404 not found)
-        const source = video.querySelector('source');
-        source.addEventListener('error', function() {
-            // This usually fires if the file name is wrong
-            showError("SOURCE ERROR: File 'forza_intro.mp4' not found in this folder.");
-        });
-
-        function showError(text) {
-            debug.style.display = 'block';
-            debug.innerHTML = "<h3>SOMETHING IS WRONG:</h3>" + text;
-        }
-
-        // Navigation Logic
+        // Navigation
         function goNext() {
             window.location.href = 'start.html';
         }
 
         document.addEventListener('keydown', (e) => { if(e.key === 'Enter') goNext(); });
         document.addEventListener('click', goNext);
-
     </script>
+
 </body>
 </html>
