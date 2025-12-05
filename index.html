@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forza Horizon 4 Intro</title>
+    <title>Forza Horizon 4</title>
     <style>
         body, html {
             margin: 0;
@@ -14,59 +15,90 @@
             background-color: black;
         }
 
-        #intro-video {
+        /* The container for the video */
+        .video-background {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Important: Allows clicks to pass through to the page */
+            overflow: hidden;
             z-index: -1;
+        }
+
+        /* 
+           We scale the iframe to 140% (1.4) to push the YouTube 
+           logo and controls off the edges of the screen 
+        */
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            transform: scale(1.4); 
+            transform-origin: center;
         }
 
         #prompt {
             position: absolute;
-            bottom: 50px;
+            bottom: 60px;
             width: 100%;
             text-align: center;
             color: white;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px #000000;
-            opacity: 0.8;
-            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 10px rgba(0,0,0,0.8);
+            letter-spacing: 2px;
+            animation: pulse 2.5s infinite;
+            z-index: 10;
         }
 
         @keyframes pulse {
-            0% { opacity: 0.5; }
+            0% { opacity: 0.4; }
             50% { opacity: 1; }
-            100% { opacity: 0.5; }
+            100% { opacity: 0.4; }
         }
     </style>
 </head>
 <body>
 
-    <!-- MAKE SURE THE VIDEO FILE IS NAMED 'forza_intro.mp4' IN THE SAME FOLDER -->
-    <video autoplay muted loop id="intro-video">
-        <source src="FH4 (1).mp4" type="video/mp4">
-        Your browser does not support HTML5 video.
-    </video>
+    <div class="video-background">
+        <!-- 
+             This embeds the Forza Horizon 4 Intro Loop.
+             - autoplay=1: Starts immediately
+             - mute=1: REQUIRED for browsers to allow autoplay
+             - controls=0: Hides buttons
+             - loop=1: Repeats video
+             - playlist: Required to make looping work
+        -->
+        <iframe 
+            src="https://www.youtube.com/embed/zWqH2W9-5q0?autoplay=1&mute=1&controls=0&loop=1&playlist=zWqH2W9-5q0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1" 
+            allow="autoplay; encrypted-media" 
+            allowfullscreen>
+        </iframe>
+    </div>
 
     <div id="prompt"></div>
 
     <script>
+        // Listen for "Enter" key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
-                window.location.href = 'start.html';
+                goToStart();
             }
         });
-        
+
+        // Listen for Mouse Click (anywhere)
         document.addEventListener('click', function() {
-             window.location.href = 'start.html';
+             goToStart();
         });
+
+        function goToStart() {
+            // OPTIONAL: Add a fade out effect here if you want
+            window.location.href = 'start.html';
+        }
     </script>
 
 </body>
