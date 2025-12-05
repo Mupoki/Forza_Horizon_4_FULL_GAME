@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forza Horizon 4</title>
+    <title>Forza Horizon 4 Intro</title>
     <style>
         body, html {
             margin: 0;
@@ -12,94 +11,118 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            background-color: black;
+            background-color: #000;
+            color: white;
+            font-family: sans-serif;
         }
 
-        /* The container for the video */
-        .video-background {
+        #video-container {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none; /* Important: Allows clicks to pass through to the page */
-            overflow: hidden;
+            top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
         }
 
-        /* 
-           We scale the iframe to 140% (1.4) to push the YouTube 
-           logo and controls off the edges of the screen 
-        */
-        iframe {
-            width: 100vw;
-            height: 100vh;
-            border: none;
-            transform: scale(1.4); 
-            transform-origin: center;
+        video {
+            min-width: 100%; 
+            min-height: 100%; 
+            width: auto; 
+            height: auto; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%);
         }
 
         #prompt {
             position: absolute;
-            bottom: 60px;
+            bottom: 50px;
             width: 100%;
             text-align: center;
-            color: white;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            text-shadow: 0px 0px 10px rgba(0,0,0,0.8);
-            letter-spacing: 2px;
-            animation: pulse 2.5s infinite;
-            z-index: 10;
+            animation: pulse 2s infinite;
+            display: none; /* Hidden until video loads */
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
+        /* Error Message Styling */
+        #debug-console {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 0, 0, 0.8);
+            padding: 20px;
+            border: 2px solid white;
+            display: none; /* Hidden unless error occurs */
+            z-index: 100;
+            max-width: 80%;
         }
+
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
 </head>
 <body>
 
-    <div class="video-background">
-        <!-- 
-             This embeds the Forza Horizon 4 Intro Loop.
-             - autoplay=1: Starts immediately
-             - mute=1: REQUIRED for browsers to allow autoplay
-             - controls=0: Hides buttons
-             - loop=1: Repeats video
-             - playlist: Required to make looping work
-        -->
-        <iframe 
-            src="https://www.youtube.com/embed/zWqH2W9-5q0?autoplay=1&mute=1&controls=0&loop=1&playlist=zWqH2W9-5q0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1" 
-            allow="autoplay; encrypted-media" 
-            allowfullscreen>
-        </iframe>
+    <div id="debug-console"></div>
+
+    <div id="video-container">
+        <!-- 'playsinline' is crucial for some browsers -->
+        <video id="myVideo" autoplay muted loop playsinline>
+            <source src="FH4 (1).mp4" type="video/mp4">
+        </video>
     </div>
 
-    <div id="prompt"></div>
+    <div id="prompt">PRESS ENTER TO START</div>
 
     <script>
-        // Listen for "Enter" key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Enter') {
-                goToStart();
+        const video = document.getElementById('myVideo');
+        const debug = document.getElementById('debug-console');
+        const prompt = document.getElementById('prompt');
+
+        // 1. Check if video loads successfully
+        video.addEventListener('canplay', () => {
+            prompt.style.display = 'block'; // Show prompt only if video works
+            video.play();
+        });
+
+        // 2. CATCH ERRORS
+        video.addEventListener('error', function(e) {
+            showError("VIDEO ERROR: The browser cannot play this file.");
+            
+            // detailed check
+            const err = video.error;
+            let msg = "";
+            if (err.code === 4) {
+                msg = "CODE 4: File Not Found or Not Supported.<br><br>" + 
+                      "1. Check if file is named exactly <b>forza_intro.mp4</b><br>" +
+                      "2. Is it in the same folder as index.html?<br>" + 
+                      "3. Windows might be hiding the real extension (e.g. forza_intro.mp4.mp4)";
+            } else {
+                msg = "Error Code: " + err.code;
             }
+            showError(msg);
+        }, true);
+
+        // 3. Catch Source Errors (specifically 404 not found)
+        const source = video.querySelector('source');
+        source.addEventListener('error', function() {
+            // This usually fires if the file name is wrong
+            showError("SOURCE ERROR: File 'forza_intro.mp4' not found in this folder.");
         });
 
-        // Listen for Mouse Click (anywhere)
-        document.addEventListener('click', function() {
-             goToStart();
-        });
+        function showError(text) {
+            debug.style.display = 'block';
+            debug.innerHTML = "<h3>SOMETHING IS WRONG:</h3>" + text;
+        }
 
-        function goToStart() {
-            // OPTIONAL: Add a fade out effect here if you want
+        // Navigation Logic
+        function goNext() {
             window.location.href = 'start.html';
         }
-    </script>
 
+        document.addEventListener('keydown', (e) => { if(e.key === 'Enter') goNext(); });
+        document.addEventListener('click', goNext);
+
+    </script>
 </body>
 </html>
