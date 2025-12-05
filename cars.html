@@ -1,461 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forza Car Collection</title>
-    <!-- Google Fonts: Roboto Condensed for that Forza look -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+    <title>Loading...</title>
+    <!-- Google Fonts: Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #111;
-            --bg-panel: #1a1a1a;
-            --highlight-pink: #ff0055;
-            --highlight-orange: #ff9900;
-            --highlight-cyan: #00e5ff;
-            --text-white: #fff;
-            --text-grey: #ccc;
-            --card-white: #f0f0f0;
-        }
-
-        * {
-            box-sizing: border-box;
+        html, body {
             margin: 0;
             padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            font-family: 'Roboto Condensed', sans-serif;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* --- TOP HEADER --- */
-        header {
-            padding: 20px 40px 10px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            font-style: italic;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-icon {
-            background: #00b894;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 1.5rem;
-        }
-
-        .credits {
-            font-size: 1.2rem;
-            background: #333;
-            padding: 5px 15px;
-            font-weight: bold;
-        }
-
-        /* --- TABS --- */
-        .tabs {
-            display: flex;
-            margin: 0 40px;
-            margin-bottom: 10px;
-        }
-
-        .tab-btn {
-            background: #fff;
-            color: #000;
-            padding: 5px 20px;
-            font-weight: 800;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            margin-right: 2px;
-            width: 50px;
-            text-align: center;
-        }
-
-        .tab-bar {
-            flex-grow: 1;
-            display: flex;
-        }
-
-        .tab-segment {
-            flex: 1;
-            background: #333;
-            color: #fff;
-            padding: 5px 0;
-            text-align: center;
-            font-weight: 700;
-            text-transform: uppercase;
-            border-top: 4px solid #555;
-            font-size: 0.9rem;
-        }
-
-        .tab-segment.active {
-            background: #fff;
-            color: #000;
-            border-top: 4px solid var(--highlight-pink);
-            /* Gradient border effect */
-            border-image: linear-gradient(to right, var(--highlight-orange), var(--highlight-pink)) 1;
-            border-top-width: 4px;
-            border-top-style: solid;
-        }
-
-        /* --- MAIN LAYOUT --- */
-        .main-container {
-            display: flex;
-            height: 100%;
-            padding: 0 40px;
-            gap: 20px;
-        }
-
-        /* --- LEFT SIDEBAR (STATS) --- */
-        .sidebar {
-            width: 300px;
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .performance-header {
-            background: #00b894; /* Teal color */
-            padding: 10px;
-            text-align: center;
-            font-weight: 800;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            font-style: italic;
-        }
-
-        .car-logo-area {
-            height: 120px;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid #333;
-        }
-        
-        .car-logo-area img {
-            width: 60px;
-            filter: invert(1); /* Make black logos white */
-        }
-
-        .stats-box {
-            background: #111;
-            padding: 20px 0;
-            font-size: 0.9rem;
-        }
-
-        .stat-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 5px 0;
-            border-bottom: 1px solid #333;
-            color: #aaa;
-            font-weight: 700;
-        }
-        .stat-row span:last-child {
-            color: #fff;
-        }
-
-        .class-badge {
-            background: #800080; /* S1 Purple */
-            color: #fff;
-            padding: 5px 10px;
-            font-weight: 900;
-            display: inline-block;
-            margin-right: 10px;
-            font-style: italic;
-        }
-
-        .drive-badge {
-            background: #fff;
-            color: #000;
-            padding: 5px 10px;
-            font-weight: 900;
-            display: inline-block;
-        }
-
-        .free-btn {
-            background: var(--highlight-cyan);
-            color: #000;
-            text-align: center;
-            padding: 10px;
-            font-weight: 900;
-            font-size: 1.2rem;
-            margin-top: auto;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            cursor: pointer;
-        }
-
-        /* --- RIGHT GRID (CARS) --- */
-        .car-grid {
-            flex-grow: 1;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            grid-auto-rows: 160px;
-            gap: 15px;
-            overflow-y: auto;
-            padding-bottom: 50px;
-            padding-right: 10px;
-        }
-
-        /* Custom Scrollbar */
-        .car-grid::-webkit-scrollbar { width: 8px; }
-        .car-grid::-webkit-scrollbar-track { background: #333; }
-        .car-grid::-webkit-scrollbar-thumb { background: #fff; }
-
-        /* --- CAR CARD --- */
-        .car-card {
-            background: var(--card-white);
-            color: #000;
-            text-decoration: none;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            border: 3px solid transparent;
-            transition: transform 0.1s, border 0.1s;
-        }
-
-        /* The Selected/Active Card Style */
-        .car-card.selected, .car-card:hover {
-            border: 3px solid var(--highlight-pink);
-            transform: scale(1.02);
-            z-index: 10;
-            /* Gradient Border Trick */
-            border-image: linear-gradient(to right, var(--highlight-orange), var(--highlight-pink)) 1;
-        }
-
-        .card-header {
-            padding: 8px 10px 0 10px;
-            font-weight: 800;
-            text-transform: uppercase;
-            line-height: 1.1;
-        }
-
-        .card-sub {
-            padding: 0 10px;
-            font-size: 0.8rem;
-            color: #666;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .card-img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            margin-top: -10px; /* Pull car up slightly */
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+            background-color: #111;
         }
 
-        .dl-icon {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            background: var(--highlight-orange);
-            color: white;
-            width: 20px;
-            height: 20px;
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Tries to load local background.png, falls back to online image */
+            background-image: url('background.png'), url('https://wallpapercave.com/wp/wp4748891.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 15vh;
+            background-color: #000;
+            z-index: 10;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            color: #FFF;
         }
 
-        /* --- FOOTER LEGEND --- */
-        .footer-legend {
-            padding: 15px 40px;
-            display: flex;
-            gap: 30px;
-            font-size: 0.9rem;
+        .loading-text {
+            font-size: 1.2rem;
             font-weight: 700;
-            background: #000;
-        }
-
-        .btn-hint {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            letter-spacing: 1px;
             text-transform: uppercase;
+            margin-bottom: 10px;
+            font-style: italic;
         }
 
-        .btn-circle {
-            width: 24px;
-            height: 24px;
+        .progress-line-container {
+            width: 350px;
+            height: 2px;
+            background-color: #333;
+            position: relative;
+            margin-bottom: 5px;
+        }
+
+        .progress-line {
+            width: 0%;
+            height: 100%;
+            background-color: #FFF;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: width 0.1s linear;
+        }
+
+        .percentage-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            font-style: italic;
+            color: #FFF;
+        }
+
+        .spinner-container {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #FFF;
             border-radius: 50%;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 900;
+            animation: spin 1s linear infinite;
         }
 
-        .btn-a { background: #76db35; color: #000;}
-        .btn-b { background: #d63031; }
-        .btn-x { background: #0984e3; }
-        .btn-y { background: #fdcb6e; color: #000; }
-
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>
-            <span class="header-icon"><i class="fas fa-car"></i></span>
-            Car Collection
-        </h1>
-        <div class="credits">CR 50,929,393</div>
-    </header>
+    <div class="background-container"></div>
 
-    <!-- Navigation Tabs -->
-    <div class="tabs">
-        <div class="tab-btn">LB</div>
-        <div class="tab-bar">
-            <div class="tab-segment active">0-4 "Welcome Pack"</div>
-            <div class="tab-segment">0 CR+</div>
-            <div class="tab-segment">250K CR+</div>
-            <div class="tab-segment">Legendary</div>
+    <div class="bottom-bar">
+        <div class="loading-content">
+            <div class="loading-text">GOING INTO HOUSE  ... PLEASE WAIT (takes upto 10 sec)</div>
+            <div class="progress-line-container">
+                <div class="progress-line"></div>
+            </div>
+            <div class="percentage-text" id="percentage">0%</div>
         </div>
-        <div class="tab-btn">RB</div>
-    </div>
-
-    <div class="main-container">
         
-        <!-- Left Sidebar (Stats) -->
-        <div class="sidebar">
-            <div class="performance-header">PERFORMANCE</div>
-            <div class="car-logo-area">
-                <!-- Simple Lamborghini text logo placeholder -->
-                <i class="fas fa-bull-horn" style="color: gold; font-size: 40px;"></i>
-            </div>
-            
-            <div style="background: #ffaa00; color: black; font-weight: 800; text-align: center; padding: 2px; text-transform: uppercase; font-size: 0.8rem;">Legendary</div>
-
-            <div class="stats-box">
-                <div class="stat-row"><span>POWER</span> <span>700 hp</span></div>
-                <div class="stat-row"><span>TORQUE</span> <span>509 ft-lb</span></div>
-                <div class="stat-row"><span>WEIGHT</span> <span>3,472 lb</span></div>
-                <div class="stat-row"><span>FRONT</span> <span>43%</span></div>
-                <div class="stat-row"><span>DISPLACEMENT</span> <span>6,498</span></div>
-            </div>
-
-            <div style="display: flex; align-items: center; margin: 10px 0;">
-                <div class="class-badge">S1 900</div>
-                <div class="drive-badge">AWD <i class="fas fa-grip-lines-vertical"></i></div>
-            </div>
-
-            <div class="free-btn">
-                <span style="background: white; color: black; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.8rem; margin-right: 5px;">CR</span>
-                FREE
-            </div>
-        </div>
-
-        <!-- Right Grid (Cars) -->
-        <div class="car-grid">
-            
-            <!-- Car 1 (Selected) -->
-            <!-- REPLACE href="#" with your real link -->
-            <a href="https://www.google.com/search?q=lamborghini+aventador" target="_blank" class="car-card selected">
-                <div class="card-header">0-4 "Welcome Pack"</div>
-                <div class="card-sub">2012 Lamborghini</div>
-                <!-- Using placeholder images. Replace src with your car images -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Lamborghini_Aventador_LP700-4_Orange.jpg/640px-Lamborghini_Aventador_LP700-4_Orange.jpg" class="card-img" alt="Lambo">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 2 -->
-            <a href="https://www.google.com/search?q=ford+gt+2017" target="_blank" class="car-card">
-                <div class="card-header">GT "Welcome Pack"</div>
-                <div class="card-sub">2017 Ford</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/2017_Ford_GT_in_Liquid_Blue%2C_Front_Left_at_NYIAS.jpg" class="card-img" alt="Ford GT">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 3 -->
-            <a href="#" class="car-card">
-                <div class="card-header">#199 WRX STI VT15R</div>
-                <div class="card-sub">2016 Subaru</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/2016_Subaru_WRX_STI_S207_NBR_Challenge_Package_Yellow_Edition_front_right.jpg/640px-2016_Subaru_WRX_STI_S207_NBR_Challenge_Package_Yellow_Edition_front_right.jpg" class="card-img" alt="Subaru">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 4 -->
-            <a href="#" class="car-card">
-                <div class="card-header">GTSR</div>
-                <div class="card-sub">1996 HSV</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/1996_HSV_GTS-R_sedan_%282011-12-14%29_01.jpg/640px-1996_HSV_GTS-R_sedan_%282011-12-14%29_01.jpg" class="card-img" alt="HSV">
-            </a>
-
-            <!-- Car 5 -->
-            <a href="#" class="car-card">
-                <div class="card-header">#1 T100 Baja Truck</div>
-                <div class="card-sub">1993 Toyota</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Ivan_Stewart_Baja_1000.jpg" class="card-img" alt="Toyota">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 6 -->
-            <a href="#" class="car-card">
-                <div class="card-header">F50 GT "Welcome Pack"</div>
-                <div class="card-sub">1996 Ferrari</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e6/Ferrari_F50_Coupe.jpg" class="card-img" alt="Ferrari">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 7 -->
-            <a href="#" class="car-card">
-                <div class="card-header">CJ5 Renegade</div>
-                <div class="card-sub">1976 Jeep</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/1976_Jeep_CJ-5_Renegade.jpg/640px-1976_Jeep_CJ-5_Renegade.jpg" class="card-img" alt="Jeep">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-            <!-- Car 8 -->
-            <a href="#" class="car-card">
-                <div class="card-header">718 RS 60 "Welcome"</div>
-                <div class="card-sub">1960 Porsche</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Porsche_718_RS_60_Spyder_1960.jpg/640px-Porsche_718_RS_60_Spyder_1960.jpg" class="card-img" alt="Porsche">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
-             <!-- Car 9 -->
-             <a href="#" class="car-card">
-                <div class="card-header">Gymkhana 9 Focus</div>
-                <div class="card-sub">2016 Hoonigan</div>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/c/c5/Ford_Focus_RS_RX_Hoonigan_Racing_Division.jpg" class="card-img" alt="Hoonigan">
-                <div class="dl-icon"><i class="fas fa-download"></i></div>
-            </a>
-
+        <div class="spinner-container">
+            <div class="spinner"></div>
         </div>
     </div>
 
-    <!-- Footer Legend -->
-    <div class="footer-legend">
-        <div class="btn-hint"><span class="btn-circle btn-a">A</span> Select</div>
-        <div class="btn-hint"><span class="btn-circle btn-b">B</span> Back</div>
-        <div class="btn-hint"><span class="btn-circle btn-x">X</span> Sort</div>
-        <div class="btn-hint"><span class="btn-circle btn-y">Y</span> Filter</div>
-        <div class="btn-hint">Jump to Value</div>
-        <div class="btn-hint">Toggle Stats</div>
-    </div>
+    <script>
+        // --- FIXED SCRIPT ---
+        
+        // Make sure this matches the name of your game file!
+        const redirectUrl = "carsmain.html"; 
+        const totalTime = 10000; // 10 seconds
 
+        const percentageText = document.getElementById('percentage');
+        const progressLine = document.querySelector('.progress-line');
+
+        let startTime = null;
+
+        function animateLoading(timestamp) {
+            if (!startTime) startTime = timestamp;
+            
+            const elapsed = timestamp - startTime;
+            let progress = Math.min((elapsed / totalTime) * 100, 100);
+            
+            percentageText.innerText = Math.floor(progress) + "%";
+            progressLine.style.width = progress + "%";
+            
+            if (elapsed < totalTime) {
+                requestAnimationFrame(animateLoading);
+            } else {
+                // Redirect happens here
+                console.log("Redirecting to " + redirectUrl);
+                window.location.href = redirectUrl;
+            }
+        }
+
+        requestAnimationFrame(animateLoading);
+    </script>
 </body>
 </html>
