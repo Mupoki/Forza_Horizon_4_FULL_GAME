@@ -1,150 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forza-Start</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonts and Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,600,900&display=swap" rel="stylesheet">
+    <title>Forza Horizon 4 Intro</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: black;
+        }
+
+        #intro-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+        }
+
+        #prompt {
+            position: absolute;
+            bottom: 50px;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000000;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+    </style>
 </head>
 <body>
 
-    <div class="background"></div>
-    
-    <div class="container">
-        <!-- Logo Section -->
-        <div class="container--logo">
-            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-logo.png" alt="Forza Logo">
-        </div>
+    <!-- MAKE SURE THE VIDEO FILE IS NAMED 'forza_intro.mp4' IN THE SAME FOLDER -->
+    <video autoplay muted loop id="intro-video">
+        <source src="FH4 (1).mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
 
-        <!-- Navigation Bar -->
-        <div class="container--navigation">
-            <div class="item--link hint">lb</div>
-            <div class="item--link active">home</div>
-            <div class="item--link">horizon life
-                <div class="item--notification">6</div>
-            </div>
-            <div class="item--link">team adventure</div>
-            <div class="item--link">creative hub</div>
-            <div class="item--link">cars
-                <div class="item--notification">2</div>
-            </div>
-            <div class="item--link">rivals</div>
-            <div class="item--link">clubs</div>
-            <div class="item--link">marketplace</div>
-            <div class="item--link hint">rb</div>
-        </div>
+    <div id="prompt"></div>
 
-        <!-- Top Menu Cards -->
-        <div class="container--top-menu">
-            <!-- Card 1 -->
-            <div class="container--card-spot size-1">
-                <!-- CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card border">
-                    <div class="item--card-image" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon1.png)"></div>
-                    <div class="container--card--text">
-                        <div class="item--notification">2</div>
-                        <div class="item--icon"><i class="fa fa-check-circle-o"></i></div>
-                        <div class="item--card-title"><div class="text">car mastery</div></div>
-                        <div class="item--card-sub"><div class="text">2/16 perks purchased</div></div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="container--card-spot size-2">
-                <!-- CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card border">
-                    <div class="item--card-image" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon3-min.png)"></div>
-                    <div class="container--card--text dark">
-                        <div class="item--card-title dark"><div class="text">go to festival</div></div>
-                        <div class="item--card-sub dark"><div class="text">Buy, upgrade, and customise cars</div></div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="container--card-spot size-1">
-                <!-- CHANGED TO A TAG -->
-                <a href="cars.html" class="container--card border">
-                    <div class="item--card-image" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-bg-2-min.jpg)"></div>
-                    <div class="container--card--text">
-                        <div class="item--icon"><i class="fa fa-car"></i></div>
-                        <div class="item--card-title"><div class="text">my cars</div></div>
-                        <div class="item--card-sub"><div class="text">17 cars owned</div></div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Bottom Menu Cards -->
-        <div class="container--bottom-menu">
-            <!-- Card 4 -->
-            <div class="container--card-spot size-1">
-                <!-- CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card">
-                    <div class="item--card-image med-height" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon-help.png)"></div>
-                    <div class="container--card--text">
-                        <div class="item--card-title"><div class="text">level 5</div></div>
-                        <div class="item--card-sub"><div class="text">Explorer</div></div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="container--card-spot size-2">
-                <!-- CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card border">
-                    <div class="item--card-image" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-bg-3.png)"></div>
-                    <div class="container--card--text dark">
-                        <div class="item--card-title dark"><div class="text">2016 aston martin</div></div>
-                        <div class="item--card-sub dark"><div class="text">Vulcan</div></div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="container--card-spot size-1">
-                <!-- CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card size-1">
-                    <div class="item--card-image med-height colorize" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon-race.png)"></div>
-                    <div class="container--card--text">
-                        <div class="item--card-title"><div class="text">level 2</div></div>
-                        <div class="item--card-sub"><div class="text">Road Racing Series</div></div>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Card 7 (Mini Cards) -->
-            <div class="container--card-spot size-1">
-                <!-- Mini Card 1 CHANGED TO A TAG -->
-                <a href="tuning.html" class="container--card-mini">
-                    <div class="container--card-mini--content">
-                        <div class="container--card-mini--image">
-                            <div class="item--card-icon" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon-settings.png)"></div>
-                        </div>
-                        <div class="container--card-mini--text">
-                            <div class="item--card-sub"><div class="text">Tune Car</div></div>
-                        </div>
-                    </div>
-                </a>
-                <!-- Mini Card 2 CHANGED TO A TAG -->
-                <a href="loading.html" class="container--card-mini">
-                    <div class="container--card-mini--content">
-                        <div class="container--card-mini--image">
-                            <div class="item--card-icon" style="background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/545665/forza-icon-hammer.png)"></div>
-                        </div>
-                        <div class="container--card-mini--text">
-                            <div class="item--card-sub"><div class="text">Auction Alerts</div></div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    <script>
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                window.location.href = 'start.html';
+            }
+        });
+        
+        document.addEventListener('click', function() {
+             window.location.href = 'start.html';
+        });
+    </script>
 
 </body>
 </html>
