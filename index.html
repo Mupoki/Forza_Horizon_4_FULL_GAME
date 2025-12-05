@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forza Horizon 4 Intro</title>
+    <title>Forza Horizon 4</title>
     <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
+      img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+      }
+
         body, html {
             margin: 0;
             padding: 0;
@@ -65,11 +77,9 @@
     <!-- ERROR MESSAGE BOX -->
     <div id="error-box"></div>
 
-    <!-- VIDEO PLAYER -->
-    <video autoplay muted loop playsinline id="video-bg">
-        <!-- Update this filename if yours is different! -->
-        <source src="video.mp4" type="video/mp4">
-    </video>
+
+   -<a
+
 
     <div id="prompt">PRESS ENTER TO START</div>
 
@@ -105,6 +115,7 @@
         document.addEventListener('keydown', (e) => { if(e.key === 'Enter') goNext(); });
         document.addEventListener('click', goNext);
     </script>
+  <img src="https://xboxwire.thesourcemediaassets.com/sites/2/ForzaHorizon4_FallWinter_01.gif">
 
 </body>
 </html>
