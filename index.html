@@ -1,121 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQye1ZI8w4zQI51HtbujoJSlE_Y1KptmBvRKw&s">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forza Horizon 4</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      img {
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-      }
-
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            background-color: black; /* Keep black background */
+            background-color: black;
             overflow: hidden;
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        #video-bg {
+        .background-container {
             position: fixed;
-            right: 0;
-            bottom: 0;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover; /* Ensures video covers screen */
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+        }
+
+        .background-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         #prompt {
-            position: absolute;
-            bottom: 50px;
+            position: relative;
+            bottom: 8%;
             width: 100%;
             text-align: center;
             color: white;
-            font-size: 30px;
+            font-size: 3vh;
             font-weight: bold;
-            text-shadow: 2px 2px 4px #000;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
             animation: pulse 2s infinite;
             z-index: 10;
+            cursor: pointer;
         }
 
-        /* Error Box Styling */
-        #error-box {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 0, 0, 0.9);
-            color: white;
-            padding: 20px;
-            border: 2px solid white;
-            z-index: 100;
-            display: none; /* Hidden unless error happens */
-            max-width: 80%;
+        @keyframes pulse { 
+            0% { opacity: 0.5; } 
+            50% { opacity: 1; } 
+            100% { opacity: 0.5; } 
         }
-
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
     </style>
 </head>
 <body>
 
-    <!-- ERROR MESSAGE BOX -->
-    <div id="error-box"></div>
+    <!-- Background GIF -->
+    <div class="background-container">
+        <img id="bg" src="https://xboxwire.thesourcemediaassets.com/sites/2/ForzaHorizon4_FallWinter_01.gif" alt="Forza Background">
+    </div>
 
-
-   -<a
-
-
+    <!-- The Button / Prompt -->
     <div id="prompt">PRESS ENTER TO START</div>
 
     <script>
-        const video = document.getElementById('video-bg');
-        const errorBox = document.getElementById('error-box');
+        function goNext() {
+            document.body.style.transition = "opacity 0.5s";
+            document.body.style.opacity = "0";
 
-        // 1. Check if the video file actually loads
-        video.addEventListener('error', function(event) {
-            let msg = "Unknown Error";
-            
-            if (video.error.code === 4) {
-                msg = "<b>FILE NOT FOUND (404)</b><br>The website cannot find 'video.mp4'.<br><br>" + 
-                      "1. Did you upload the video file to the website?<br>" +
-                      "2. Is the file name exactly 'video.mp4' (lowercase)?";
-            } else if (video.error.code === 3) {
-                msg = "<b>DECODE ERROR</b><br>The video file is corrupted or the browser cannot play this format.";
-            }
+            setTimeout(() => {
+                window.location.href = 'start.html';
+            }, 500);
+        }
 
-            errorBox.style.display = 'block';
-            errorBox.innerHTML = "<h3>VIDEO ERROR:</h3>" + msg;
-        }, true);
-
-        // 2. Force Play (Fix for some browsers sticking on black screen)
-        video.addEventListener('loadeddata', function() {
-            video.play();
+        // Enter key support
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Enter') goNext(); 
         });
 
-        // 3. Navigation
-        function goNext() {
-            window.location.href = 'start.html';
-        }
-        document.addEventListener('keydown', (e) => { if(e.key === 'Enter') goNext(); });
-        document.addEventListener('click', goNext);
+        // Click only on the text
+        document.getElementById('prompt').addEventListener('click', goNext);
+
+        // Load GIF after page loads to avoid CORS / loading issues
+        window.onload = () => {
+            document.getElementById('bg').src = 'https://xboxwire.thesourcemediaassets.com/sites/2/ForzaHorizon4_FallWinter_01.gif';
+        };
     </script>
-  <img src="https://xboxwire.thesourcemediaassets.com/sites/2/ForzaHorizon4_FallWinter_01.gif">
 
 </body>
 </html>
